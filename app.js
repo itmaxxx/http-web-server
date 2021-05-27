@@ -8,31 +8,26 @@ const port = process.env.PORT || 5000;
 const app = new Emitter();
 
 app.on(/^\/files\/(\d{0,9})$/, function (req, res) {
-  console.log('/files/[id]', this.matches);
-
   res.end(`/files/${this.matches[1]}`);
 });
 
 app.on(/^\/user\/(\d{0,9})\/(.+)$/, function (req, res) {
-  console.log('/user/[id]/[string]', this.matches);
-
   res.end(`/user/${this.matches[1]}/${this.matches[2]}`);
 });
 
 app.on(/^\/pdf\/(\d{0,9})$/, function (req, res) {
-  console.log('/pdf/[id]', this.matches);
-
   res.end(`/pdf/${this.matches[1]}`);
 });
 
 app.on(/^\/$/, function (req, res) {
-  console.log('/');
-
   res.end('Hi there');
 });
 
 app.on(/.+/, function (req, res) {
-  res.end('*');
+  res.writeHead(404, {
+    'Content-Type': 'application/json',
+  });
+  res.end(JSON.stringify({ error: 'Page not found' }));
 });
 
 const server = http.createServer((req, res) => {
