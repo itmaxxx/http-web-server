@@ -43,17 +43,23 @@ function generateUsersPDF(users) {
 		timeout: 3600 * 60
 	};
 
+	let tempPath = path.join(__dirname, '../public/10k-temp.pdf');
+	let outputPath = path.join(__dirname, '../public/10k.pdf');
+
 	let document = {
 		html: html,
 		data: { users },
-		path: path.join(__dirname, '../public/10k-temp.pdf'),
-		type: ''
+		path: tempPath
 	};
 
 	pdf
 		.create(document, options)
 		.then((res) => {
-			console.log(res);
+			fs.rename(res.filename, outputPath, (error) => {
+				if (error) throw error;
+
+				console.log('10k file created and saved');
+			});
 		})
 		.catch((error) => {
 			console.error(error);

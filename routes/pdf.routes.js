@@ -1,4 +1,6 @@
 const Router = require('../classes/Router');
+const fs = require('fs');
+const path = require('path');
 const {
 	generateUserPDF,
 	generateUsersPDF
@@ -36,6 +38,12 @@ router.post.on(/^\/api\/pdf\/create$/, async function (req, res) {
 
 router.post.on(/^\/api\/pdf\/10k$/, async function (req, res) {
 	try {
+		let pdfPath = path.join(__dirname, '../public/10k.pdf');
+
+		if (fs.existsSync(pdfPath)) {
+			throw { error: true, message: 'File already exists' };
+		}
+
 		let data = await getRandomUser();
 		let user = {};
 
@@ -68,7 +76,31 @@ router.post.on(/^\/api\/pdf\/10k$/, async function (req, res) {
 });
 
 router.get.on(/^\/api\/pdf\/10k$/, function (req, res) {
-	res.end(`/api/pdf/10k`);
+	try {
+		let pdfPath = path.join(__dirname, '../public/10k.pdf');
+
+		if (fs.existsSync(pdfPath)) {
+			let pdfInfo = fs.statSync(pdfPath);
+
+			res.writeHead(200, {
+				'Content-Type': 'application/pdf',
+				'Content-Length': pdfInfo.size
+			});
+
+			let readStream = fs.createReadStream(pdfPath);
+			readStream.pipe(res);
+		} else {
+			throw { error: true, message: "File doesn't exist" };
+		}
+	} catch (error) {
+		console.error(error);
+
+		res.writeHead(400, {
+			'Content-Type': 'application/json'
+		});
+
+		return res.end(JSON.stringify(error));
+	}
 });
 
 module.exports = router;
