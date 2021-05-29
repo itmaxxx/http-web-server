@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "d409e66d-5ee8-44ab-84b2-79c684a45f33",
+		"name": "Node Http Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/users/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "first_name",
+							"value": "Max",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Dmitriev",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "dmitrievmaks77@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "380671352043",
+							"type": "text"
+						},
+						{
+							"key": "location",
+							"value": "{\"city\":\"Odessa\", \"adress\":\"Pushkina Str. 7\"}",
+							"type": "text"
+						},
+						{
+							"key": "social_networks",
+							"value": "[{\"name\":\"GitHub\",\"link\":\"https://github.com/itmaxxx\"},{\"name\":\"LinkedIn\",\"link\":\"https://linkedin.com/itmaxxx\"}]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5500/api/users/create",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "5500",
+					"path": ["api", "users", "create"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/[id]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5500/api/users/60b20fd53239b623e80012dc",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "5500",
+					"path": ["api", "users", "60b20fd53239b623e80012dc"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "60b140f6d0074332ac58c31e",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5500/api/users/delete",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "5500",
+					"path": ["api", "users", "delete"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/pdf/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "60b20fd53239b623e80012dc",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5500/api/pdf/create",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "5500",
+					"path": ["api", "pdf", "create"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/pdf/10k",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5500/api/pdf/10k",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "5500",
+					"path": ["api", "pdf", "10k"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/pdf/10k",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5500/api/pdf/10k",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "5500",
+					"path": ["api", "pdf", "10k"]
+				}
+			},
+			"response": []
+		}
+	]
+}
