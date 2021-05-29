@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<mate charest="utf-8" />
+		<title>Users profiles</title>
+	</head>
+	<body>
+    {{#each users}}
+      <h1>{{this.first_name}} {{this.last_name}}</h1>
+      <p><b>E-mail</b> {{this.email}}</p>
+      <p><b>Phone</b> {{this.phone}}</p>
+      <p>
+      <b>Adress</b></br>
+      {{this.location.city}}</br>{{this.location.adress}}
+      </p>
+
+      {{#if this.social_networks}}
+        {{#each this.social_networks}}
+        <p>
+        <b>{{this.name}}</b> <a href="{{this.link}}">{{this.link}}</a>
+        </p>
+        {{/each}}
+      {{/if}}
+    {{/each}}
+	</body>
+</html>
